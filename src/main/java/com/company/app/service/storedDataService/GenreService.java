@@ -1,0 +1,17 @@
+package com.company.app.service.storedDataService;
+
+import com.company.app.model.storedDataModel.Genre;
+import com.company.app.repository.storedDataRepositroy.GenreRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class GenreService {
+    @Autowired
+    private GenreRepository genreRepository;
+    public List<Genre> findAll() {
+        return genreRepository.findAll();
+    }
+}
