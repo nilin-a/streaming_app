@@ -20,7 +20,10 @@ public class PerformerService {
     }
 
     public Performer findPerformer(Long id) {
-        return performerRepository.findById(id).orElseThrow();
+        Performer performer = performerRepository.findById(id).orElseThrow();
+        performer.setCity(performer.getCity());
+        performer.setGenre(performer.getGenre());
+        return performer;
     }
 
     public List<Performer> findAllPerformers() {

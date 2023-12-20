@@ -2,16 +2,16 @@ package com.company.app.controller.storedDataController;
 
 import com.company.app.model.storedDataModel.Country;
 import com.company.app.service.storedDataService.CountryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/countries")
 public class CountryController {
-    @Autowired
-    private CountryService countryService;
+    private final CountryService countryService;
 
     @PostMapping
     public Country create(@RequestBody Country country) {

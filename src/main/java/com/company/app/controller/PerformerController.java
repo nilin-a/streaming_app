@@ -2,16 +2,17 @@ package com.company.app.controller;
 
 import com.company.app.model.Performer;
 import com.company.app.service.PerformerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/performers")
 public class PerformerController {
-    @Autowired
-    private PerformerService performerService;
+    private final PerformerService performerService;
 
     @PostMapping
     public Performer create(@RequestBody Performer performer) {

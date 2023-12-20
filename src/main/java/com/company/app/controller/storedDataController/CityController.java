@@ -2,16 +2,17 @@ package com.company.app.controller.storedDataController;
 
 import com.company.app.model.storedDataModel.City;
 import com.company.app.service.storedDataService.CityService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/cities")
 public class CityController {
-    @Autowired
-    private CityService cityService;
+    private final CityService cityService;
 
     @PostMapping("/{stateId}")
     public City create(@PathVariable Long stateId, @RequestBody City city) {

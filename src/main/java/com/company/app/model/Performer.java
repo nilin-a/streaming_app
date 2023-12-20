@@ -27,12 +27,10 @@ public class Performer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
-    @JsonIgnore
     private City city;
 
     private Date birthDate;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Genre> genre;
 }
