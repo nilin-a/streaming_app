@@ -8,24 +8,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/genre")
+@RequestMapping("/genres")
 public class GenreController {
     @Autowired
     private GenreService genreService;
 
-    @GetMapping
-    public List<Genre> findAll() {
-        return genreService.findAllGenre();
+    @PostMapping
+    public Genre create(@RequestBody Genre genre) {
+        return genreService.createGenre(genre);
     }
-
     @GetMapping("/{id}")
     public Genre find(@PathVariable Long id) {
         return genreService.findGenre(id);
     }
 
-    @PostMapping
-    public Genre create(@RequestBody Genre genre) {
-        return genreService.createGenre(genre);
+    @GetMapping
+    public List<Genre> findAll() {
+        return genreService.findAllGenre();
     }
 
     @PutMapping

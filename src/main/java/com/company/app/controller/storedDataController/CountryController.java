@@ -13,24 +13,24 @@ public class CountryController {
     @Autowired
     private CountryService countryService;
 
-    @GetMapping()
-    public List<Country> findAll() {
-        return countryService.findAllCountries();
-    }
-
-    @GetMapping("/{id}")
-    public Country findById(@PathVariable Long id) {
-        return countryService.findCountry(id);
-    }
-
     @PostMapping
     public Country create(@RequestBody Country country) {
         return countryService.createCountry(country);
     }
 
+    @GetMapping("/{id}")
+    public Country find(@PathVariable Long id) {
+        return countryService.findCountry(id);
+    }
+
+    @GetMapping()
+    public List<Country> findAll() {
+        return countryService.findAllCountries();
+    }
+
     @PutMapping
     public Country update(@RequestBody Country country) {
-        return  countryService.updateCountry(country);
+        return countryService.updateCountry(country);
     }
 
     @DeleteMapping("/{id}")

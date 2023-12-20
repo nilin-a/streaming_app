@@ -14,9 +14,9 @@ public class StateController {
     @Autowired
     private StateService stateService;
 
-    @GetMapping
-    public List<State> findAll() {
-        return stateService.findAllStates();
+    @PostMapping("/{countryId}")
+    public State create(@PathVariable Long countryId, @RequestBody State state) {
+        return stateService.createState(countryId, state);
     }
 
     @GetMapping("/{id}")
@@ -24,9 +24,9 @@ public class StateController {
         return stateService.findState(id);
     }
 
-    @PostMapping("/{countryID}")
-    public State create(@PathVariable Long countryID, @RequestBody State state) {
-        return stateService.createState(countryID, state);
+    @GetMapping
+    public List<State> findAll() {
+        return stateService.findAllStates();
     }
 
     @PutMapping

@@ -12,8 +12,11 @@ import java.util.Optional;
 public class CityService {
     @Autowired
     private CityRepository cityRepository;
+    @Autowired
+    private StateService stateService;
 
-    public City createCity(City city) {
+    public City createCity(Long stateId, City city) {
+        city.setState(stateService.findState(stateId));
         return cityRepository.save(city);
     }
 
@@ -28,7 +31,6 @@ public class CityService {
     public City updateCity(City city) {
         City updatedCity = cityRepository.findById(city.getId()).orElseThrow();
         updatedCity.setName(city.getName());
-        updatedCity.setState(city.getState());
         return cityRepository.save(updatedCity);
     }
 

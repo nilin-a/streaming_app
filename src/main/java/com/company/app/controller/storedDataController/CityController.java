@@ -13,9 +13,9 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-    @GetMapping
-    public List<City> findAll() {
-        return cityService.findAllCities();
+    @PostMapping("/{stateId}")
+    public City create(@PathVariable Long stateId, @RequestBody City city) {
+        return cityService.createCity(stateId, city);
     }
 
     @GetMapping("/{id}")
@@ -23,9 +23,9 @@ public class CityController {
         return cityService.findCity(id);
     }
 
-    @PostMapping
-    public City create(@RequestBody City city) {
-        return cityService.createCity(city);
+    @GetMapping
+    public List<City> findAll() {
+        return cityService.findAllCities();
     }
 
     @PutMapping
@@ -33,7 +33,7 @@ public class CityController {
         return cityService.updateCity(city);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         cityService.deleteCity(id);
     }

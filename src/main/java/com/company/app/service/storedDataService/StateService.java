@@ -16,8 +16,8 @@ public class StateService {
     @Autowired
     private CountryService countryService;
 
-    public State createState(Long countryID, State state) {
-        state.setCountry(countryService.findCountry(countryID));
+    public State createState(Long countryId, State state) {
+        state.setCountry(countryService.findCountry(countryId));
         return stateRepository.save(state);
     }
 
