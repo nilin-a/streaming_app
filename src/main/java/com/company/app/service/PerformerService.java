@@ -1,29 +1,23 @@
 package com.company.app.service;
 
 import com.company.app.model.Performer;
-import com.company.app.model.storedDataModel.Genre;
 import com.company.app.repository.PerformerRepository;
-import com.company.app.service.storedDataService.CityService;
-import com.company.app.service.storedDataService.GenreService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class PerformerService {
-    @Autowired
-    private PerformerRepository performerRepository;
+    private final PerformerRepository performerRepository;
 
     public Performer createPerformer(Performer performer) {
         return performerRepository.save(performer);
     }
 
     public Performer findPerformer(Long id) {
-        Performer performer = performerRepository.findById(id).orElseThrow();
-        performer.setCity(performer.getCity());
-        performer.setGenre(performer.getGenre());
-        return performer;
+        return performerRepository.findById(id).orElseThrow();
     }
 
     public List<Performer> findAllPerformers() {

@@ -4,17 +4,17 @@ import com.company.app.model.storedDataModel.Country;
 import com.company.app.model.storedDataModel.State;
 import com.company.app.repository.storedDataRepositroy.CountryRepository;
 import com.company.app.repository.storedDataRepositroy.StateRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Service
 public class StateService {
-    @Autowired
-    private StateRepository stateRepository;
-    @Autowired
-    private CountryService countryService;
+    private final StateRepository stateRepository;
+    private final CountryService countryService;
 
     public State createState(Long countryId, State state) {
         state.setCountry(countryService.findCountry(countryId));

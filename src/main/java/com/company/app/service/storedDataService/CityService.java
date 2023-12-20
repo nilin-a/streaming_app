@@ -1,19 +1,20 @@
 package com.company.app.service.storedDataService;
 
 import com.company.app.model.storedDataModel.City;
+import com.company.app.model.storedDataModel.State;
 import com.company.app.repository.storedDataRepositroy.CityRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class CityService {
-    @Autowired
-    private CityRepository cityRepository;
-    @Autowired
-    private StateService stateService;
+    private final CityRepository cityRepository;
+    private final StateService stateService;
 
     public City createCity(Long stateId, City city) {
         city.setState(stateService.findState(stateId));
