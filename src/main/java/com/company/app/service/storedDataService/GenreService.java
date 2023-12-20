@@ -11,7 +11,22 @@ import java.util.List;
 public class GenreService {
     @Autowired
     private GenreRepository genreRepository;
-    public List<Genre> findAll() {
+    public Genre createGenre(Genre genre) {
+        return genreRepository.save(genre);
+    }
+
+    public Genre findGenre(Long id) {
+        return genreRepository.findById(id).orElseThrow();
+    }
+    public List<Genre> findAllGenre() {
         return genreRepository.findAll();
+    }
+
+    public Genre updateGenre(Genre genre) {
+        return genreRepository.save(genre);
+    }
+
+    public void deleteGenre(Long id) {
+        genreRepository.deleteById(id);
     }
 }

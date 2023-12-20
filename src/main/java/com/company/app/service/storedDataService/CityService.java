@@ -32,7 +32,7 @@ public class CityService {
         return cityRepository.save(updatedCity);
     }
 
-    public void delete(long id) {
+    public void deleteCity(long id) {
         cityRepository.deleteById(id);
     }
 
