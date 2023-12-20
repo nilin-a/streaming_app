@@ -2,6 +2,7 @@ package com.company.app.controller.storedDataController;
 
 import com.company.app.model.storedDataModel.State;
 import com.company.app.service.storedDataService.StateService;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,9 @@ public class StateController {
         return stateService.findState(id);
     }
 
-    @PostMapping
-    public State create(@RequestBody State state) {
-        return stateService.createState(state);
+    @PostMapping("/{countryID}")
+    public State create(@PathVariable Long countryID, @RequestBody State state) {
+        return stateService.createState(countryID, state);
     }
 
     @PutMapping

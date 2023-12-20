@@ -1,5 +1,6 @@
 package com.company.app.service.storedDataService;
 
+import com.company.app.model.storedDataModel.Country;
 import com.company.app.model.storedDataModel.State;
 import com.company.app.repository.storedDataRepositroy.CountryRepository;
 import com.company.app.repository.storedDataRepositroy.StateRepository;
@@ -15,10 +16,9 @@ public class StateService {
     @Autowired
     private CountryService countryService;
 
-    public State createState(State state) {
-        State newState = stateRepository.save(state);
-        newState.setCountry(countryService.findCountry(state.getCountry().getId()));
-        return newState;
+    public State createState(Long countryID, State state) {
+        state.setCountry(countryService.findCountry(countryID));
+        return stateRepository.save(state);
     }
 
     public State findState(Long id) {
@@ -32,8 +32,7 @@ public class StateService {
     public State updateState(State state) {
         State updatedState = stateRepository.findById(state.getId()).orElseThrow();
         updatedState.setName(state.getName());
-        updatedState.setCountry(state.getCountry());
-        return updatedState;
+        return stateRepository.save(updatedState);
     }
 
     public void deleteState(Long id) {
