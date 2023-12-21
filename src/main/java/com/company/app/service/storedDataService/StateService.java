@@ -22,7 +22,8 @@ public class StateService {
     }
 
     public State findState(Long id) {
-        return stateRepository.findById(id).orElseThrow();
+        State state = stateRepository.findById(id).orElseThrow();
+        return state;
     }
 
     public List<State> findAllStates() {

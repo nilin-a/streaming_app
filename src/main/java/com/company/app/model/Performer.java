@@ -25,7 +25,7 @@ public class Performer {
 
     private String information;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "city_id")
     private City city;
 

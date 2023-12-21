@@ -17,8 +17,8 @@ public class State {
 
     @Column(nullable = false)
     private String name;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+//fetch = FetchType.LAZY, optional = false
+    @ManyToOne()
     @JoinColumn(name = "country_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Country country;
