@@ -9,28 +9,34 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import javax.swing.*;
 import java.sql.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
+@Table
 public class Performer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private long id;
 
     @Column(nullable = false)
     private String name;
 
+    @Column
     private String information;
 
     @ManyToOne()
-    @JoinColumn(name = "city_id")
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private City city;
 
+    @Column
     private Date birthDate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "performers")
     private List<Genre> genre;
 }

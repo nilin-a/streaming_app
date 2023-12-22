@@ -17,7 +17,8 @@ public class PerformerService {
     }
 
     public Performer findPerformer(Long id) {
-        return performerRepository.findById(id).orElseThrow();
+        Performer performer = performerRepository.findById(id).orElseThrow();
+        return performer;
     }
 
     public List<Performer> findAllPerformers() {

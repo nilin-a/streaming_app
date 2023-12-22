@@ -15,9 +15,9 @@ import java.util.List;
 public class StateController {
     private final StateService stateService;
 
-    @PostMapping("/{countryId}")
-    public State create(@PathVariable Long countryId, @RequestBody State state) {
-        return stateService.createState(countryId, state);
+    @PostMapping()
+    public State create(@RequestBody State state) {
+        return stateService.createState(state);
     }
 
     @GetMapping("/{id}")

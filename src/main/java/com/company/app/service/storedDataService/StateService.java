@@ -16,13 +16,14 @@ public class StateService {
     private final StateRepository stateRepository;
     private final CountryService countryService;
 
-    public State createState(Long countryId, State state) {
-        state.setCountry(countryService.findCountry(countryId));
+    public State createState(State state) {
         return stateRepository.save(state);
     }
 
     public State findState(Long id) {
-        return stateRepository.findById(id).orElseThrow();
+        State state = stateRepository.findById(id).orElseThrow();
+        state.setCountry(countryService.findCountry(state.getCountry().getId()));
+        return state;
     }
 
     public List<State> findAllStates() {

@@ -22,7 +22,8 @@ public class CityService {
     }
 
     public City findCity(Long id) {
-        return cityRepository.findById(id).orElseThrow();
+        City city = cityRepository.findById(id).orElseThrow();
+        return city;
     }
 
     public List<City> findAllCities() {

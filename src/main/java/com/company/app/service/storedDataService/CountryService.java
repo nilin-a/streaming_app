@@ -18,7 +18,8 @@ public class CountryService {
     }
 
     public Country findCountry(Long id) {
-        return countryRepository.findById(id).orElseThrow();
+        Country country = countryRepository.findById(id).orElseThrow();
+        return country;
     }
 
     public List<Country> findAllCountries() {
