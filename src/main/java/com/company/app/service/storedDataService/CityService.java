@@ -1,43 +1,49 @@
 package com.company.app.service.storedDataService;
 
+import com.company.app.dto.storedDataDTO.CityDTO;
+import com.company.app.mapper.storedDataMapper.CityMapper;
+import com.company.app.mapper.storedDataMapper.StateMapper;
+import com.company.app.mapper.storedDataMapper.list.CityListMapper;
 import com.company.app.model.storedDataModel.City;
-import com.company.app.model.storedDataModel.State;
 import com.company.app.repository.storedDataRepositroy.CityRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
 public class CityService {
     private final CityRepository cityRepository;
-    private final StateService stateService;
+    private final CityMapper cityMapper;
+    private final CityListMapper cityListMapper;
+    private final StateMapper stateMapper;
 
-    public City createCity(Long stateId, City city) {
-        city.setState(stateService.findState(stateId));
-        return cityRepository.save(city);
+    public CityDTO createCity(CityDTO cityDTO) {
+        City city = cityRepository.save(cityMapper.toEntity(cityDTO));
+        return cityMapper.toDTO(city);
     }
 
-    public City findCity(Long id) {
+    public CityDTO findCity(Long id) {
         City city = cityRepository.findById(id).orElseThrow();
-        return city;
+        return cityMapper.toDTO(city);
     }
 
-    public List<City> findAllCities() {
-        return cityRepository.findAll();
+    public List<CityDTO> findAllCities() {
+        return cityListMapper.toDTOList(cityRepository.findAll());
     }
 
-    public City updateCity(City city) {
+    public CityDTO updateCity(CityDTO city) {
         City updatedCity = cityRepository.findById(city.getId()).orElseThrow();
         updatedCity.setName(city.getName());
-        return cityRepository.save(updatedCity);
+        updatedCity.setState(stateMapper.toEntity(city.getState()));
+        cityRepository.save(updatedCity);
+        return cityMapper.toDTO(updatedCity);
     }
 
-    public void deleteCity(long id) {
+    public CityDTO deleteCity(long id) {
+        City city = cityRepository.findById(id).orElseThrow();
         cityRepository.deleteById(id);
+        return cityMapper.toDTO(city);
     }
-
 }

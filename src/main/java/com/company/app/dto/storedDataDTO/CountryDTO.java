@@ -9,5 +9,5 @@ import java.util.List;
 public class CountryDTO {
     private long id;
     private String name;
-    private List<StateDTO> stateNames; // Используйте тип данных, соответствующий вашему случаю
+    //private List<StateDTO> states;
 }

@@ -1,5 +1,6 @@
 package com.company.app.controller.storedDataController;
 
+import com.company.app.dto.storedDataDTO.CountryDTO;
 import com.company.app.model.storedDataModel.Country;
 import com.company.app.service.storedDataService.CountryService;
 import lombok.RequiredArgsConstructor;
@@ -14,27 +15,27 @@ public class CountryController {
     private final CountryService countryService;
 
     @PostMapping
-    public Country create(@RequestBody Country country) {
+    public CountryDTO create(@RequestBody CountryDTO country) {
         return countryService.createCountry(country);
     }
 
     @GetMapping("/{id}")
-    public Country find(@PathVariable Long id) {
+    public CountryDTO find(@PathVariable Long id) {
         return countryService.findCountry(id);
     }
 
     @GetMapping()
-    public List<Country> findAll() {
+    public List<CountryDTO> findAll() {
         return countryService.findAllCountries();
     }
 
     @PutMapping
-    public Country update(@RequestBody Country country) {
+    public CountryDTO update(@RequestBody CountryDTO country) {
         return countryService.updateCountry(country);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable Long id) {
-        countryService.deleteCountry(id);
+    public CountryDTO deleteById(@PathVariable Long id) {
+        return countryService.deleteCountry(id);
     }
 }

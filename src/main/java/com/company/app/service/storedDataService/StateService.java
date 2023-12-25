@@ -1,11 +1,12 @@
 package com.company.app.service.storedDataService;
 
-import com.company.app.model.storedDataModel.Country;
+import com.company.app.dto.storedDataDTO.StateDTO;
+import com.company.app.mapper.storedDataMapper.CountryMapper;
+import com.company.app.mapper.storedDataMapper.StateMapper;
+import com.company.app.mapper.storedDataMapper.list.StateListMapper;
 import com.company.app.model.storedDataModel.State;
-import com.company.app.repository.storedDataRepositroy.CountryRepository;
 import com.company.app.repository.storedDataRepositroy.StateRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,29 +15,37 @@ import java.util.List;
 @Service
 public class StateService {
     private final StateRepository stateRepository;
-    private final CountryService countryService;
+    //private final CountryService countryService;
+    private final StateMapper stateMapper;
+    private final StateListMapper stateListMapper;
+    private final CountryMapper countryMapper;
 
-    public State createState(State state) {
-        return stateRepository.save(state);
+    public StateDTO createState(StateDTO stateDTO) {
+        State state = stateRepository.save(stateMapper.toEntity(stateDTO));
+        return stateMapper.toDTO(stateRepository.findById(state.getId()).orElseThrow());
     }
 
-    public State findState(Long id) {
+    public StateDTO findState(Long id) {
         State state = stateRepository.findById(id).orElseThrow();
-        state.setCountry(countryService.findCountry(state.getCountry().getId()));
-        return state;
+        //state.setCountry(countryService.findCountry(state.getCountry().getId()));
+        return stateMapper.toDTO(state);
     }
 
-    public List<State> findAllStates() {
-        return stateRepository.findAll();
+    public List<StateDTO> findAllStates() {
+        return stateListMapper.toDTOList(stateRepository.findAll());
     }
 
-    public State updateState(State state) {
-        State updatedState = stateRepository.findById(state.getId()).orElseThrow();
-        updatedState.setName(state.getName());
-        return stateRepository.save(updatedState);
+    public StateDTO updateState(StateDTO stateDTO) {
+        State updatedState = stateRepository.findById(stateDTO.getId()).orElseThrow();
+        updatedState.setName(stateDTO.getName());
+        updatedState.setCountry(countryMapper.toEntity(stateDTO.getCountry()));
+        stateRepository.save(updatedState);
+        return stateMapper.toDTO(updatedState);
     }
 
-    public void deleteState(Long id) {
+    public StateDTO deleteState(Long id) {
+        State state = stateRepository.findById(id).orElseThrow();
         stateRepository.deleteById(id);
+        return stateMapper.toDTO(state);
     }
 }

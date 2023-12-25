@@ -1,5 +1,6 @@
 package com.company.app.controller.storedDataController;
 
+import com.company.app.dto.storedDataDTO.CityDTO;
 import com.company.app.model.storedDataModel.City;
 import com.company.app.service.storedDataService.CityService;
 import lombok.RequiredArgsConstructor;
@@ -14,29 +15,29 @@ import java.util.List;
 public class CityController {
     private final CityService cityService;
 
-    @PostMapping("/{stateId}")
-    public City create(@PathVariable Long stateId, @RequestBody City city) {
-        return cityService.createCity(stateId, city);
+    @PostMapping()
+    public CityDTO create(@RequestBody CityDTO city) {
+        return cityService.createCity(city);
     }
 
     @GetMapping("/{id}")
-    public City find(@PathVariable Long id) {
+    public CityDTO find(@PathVariable Long id) {
         return cityService.findCity(id);
     }
 
     @GetMapping
-    public List<City> findAll() {
+    public List<CityDTO> findAll() {
         return cityService.findAllCities();
     }
 
     @PutMapping
-    public City update(@RequestBody City city) {
+    public CityDTO update(@RequestBody CityDTO city) {
         return cityService.updateCity(city);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        cityService.deleteCity(id);
+    public CityDTO delete(@PathVariable Long id) {
+        return cityService.deleteCity(id);
     }
 }
 

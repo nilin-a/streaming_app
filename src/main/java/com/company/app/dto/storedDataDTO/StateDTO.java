@@ -1,5 +1,6 @@
 package com.company.app.dto.storedDataDTO;
 
+import com.company.app.model.storedDataModel.Country;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,5 +11,6 @@ import java.util.List;
 public class StateDTO {
     private long id;
     private String name;
-    private List<CityDTO> cities; // Используйте тип данных, соответствующий вашему случаю
+    private CountryDTO country;
+    //private List<CityDTO> cities;
 }

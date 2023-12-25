@@ -1,5 +1,8 @@
 package com.company.app.service.storedDataService;
 
+import com.company.app.dto.storedDataDTO.GenreDTO;
+import com.company.app.mapper.storedDataMapper.GenreMapper;
+import com.company.app.mapper.storedDataMapper.list.GenreListMapper;
 import com.company.app.model.storedDataModel.Genre;
 import com.company.app.repository.storedDataRepositroy.GenreRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,22 +15,31 @@ import java.util.List;
 @Service
 public class GenreService {
     private final GenreRepository genreRepository;
-    public Genre createGenre(Genre genre) {
-        return genreRepository.save(genre);
+    private final GenreMapper genreMapper;
+    private final GenreListMapper genreListMapper;
+
+    public GenreDTO createGenre(GenreDTO genreDTO) {
+        Genre genre = genreRepository.save(genreMapper.toEntity(genreDTO));
+        return genreMapper.toDTO(genreRepository.findById(genre.getId()).orElseThrow());
     }
 
-    public Genre findGenre(Long id) {
-        return genreRepository.findById(id).orElseThrow();
+    public GenreDTO findGenre(Long id) {
+        return genreMapper.toDTO(genreRepository.findById(id).orElseThrow());
     }
-    public List<Genre> findAllGenre() {
-        return genreRepository.findAll();
-    }
-
-    public Genre updateGenre(Genre genre) {
-        return genreRepository.save(genre);
+    public List<GenreDTO> findAllGenre() {
+        return genreListMapper.toDTOList(genreRepository.findAll());
     }
 
-    public void deleteGenre(Long id) {
+    public GenreDTO updateGenre(GenreDTO genre) {
+        Genre updatedGenre = genreRepository.findById(genre.getId()).orElseThrow();
+        updatedGenre.setName(genre.getName());
+        genreRepository.save(updatedGenre);
+        return genreMapper.toDTO(updatedGenre);
+    }
+
+    public GenreDTO deleteGenre(Long id) {
+        Genre genre = genreRepository.findById(id).orElseThrow();
         genreRepository.deleteById(id);
+        return genreMapper.toDTO(genre);
     }
 }

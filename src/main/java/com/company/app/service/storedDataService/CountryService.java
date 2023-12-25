@@ -1,5 +1,8 @@
 package com.company.app.service.storedDataService;
 
+import com.company.app.dto.storedDataDTO.CountryDTO;
+import com.company.app.mapper.storedDataMapper.CountryMapper;
+import com.company.app.mapper.storedDataMapper.list.CountryListMapper;
 import com.company.app.model.storedDataModel.Country;
 import com.company.app.repository.storedDataRepositroy.CountryRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,27 +15,32 @@ import java.util.List;
 @Service
 public class CountryService {
     private final CountryRepository countryRepository;
+    private final CountryMapper countryMapper;
+    private final CountryListMapper countryListMapper;
 
-    public Country createCountry(Country country) {
-        return countryRepository.save(country);
+    public CountryDTO createCountry(CountryDTO countryDTO) {
+        Country country = countryRepository.save(countryMapper.toEntity(countryDTO));
+        return countryMapper.toDTO(countryRepository.findById(country.getId()).orElseThrow());
     }
 
-    public Country findCountry(Long id) {
-        Country country = countryRepository.findById(id).orElseThrow();
-        return country;
+    public CountryDTO findCountry(Long id) {
+        return countryMapper.toDTO(countryRepository.findById(id).orElseThrow());
     }
 
-    public List<Country> findAllCountries() {
-        return countryRepository.findAll();
+    public List<CountryDTO> findAllCountries() {
+        return countryListMapper.toDTOList(countryRepository.findAll());
     }
 
-    public Country updateCountry(Country city) {
+    public CountryDTO updateCountry(CountryDTO city) {
         Country updatedCountry= countryRepository.findById(city.getId()).orElseThrow();
         updatedCountry.setName(city.getName());
-        return countryRepository.save(updatedCountry);
+        countryRepository.save(updatedCountry);
+        return countryMapper.toDTO(updatedCountry);
     }
 
-    public void deleteCountry(long id) {
+    public CountryDTO deleteCountry(long id) {
+        Country country = countryRepository.findById(id).orElseThrow();
         countryRepository.deleteById(id);
+        return countryMapper.toDTO(country);
     }
 }

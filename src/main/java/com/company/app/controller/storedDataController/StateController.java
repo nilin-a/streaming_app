@@ -1,5 +1,6 @@
 package com.company.app.controller.storedDataController;
 
+import com.company.app.dto.storedDataDTO.StateDTO;
 import com.company.app.model.storedDataModel.State;
 import com.company.app.service.storedDataService.StateService;
 import lombok.RequiredArgsConstructor;
@@ -16,27 +17,27 @@ public class StateController {
     private final StateService stateService;
 
     @PostMapping()
-    public State create(@RequestBody State state) {
+    public StateDTO create(@RequestBody StateDTO state) {
         return stateService.createState(state);
     }
 
     @GetMapping("/{id}")
-    public State find(@PathVariable Long id) {
+    public StateDTO find(@PathVariable Long id) {
         return stateService.findState(id);
     }
 
     @GetMapping
-    public List<State> findAll() {
+    public List<StateDTO> findAll() {
         return stateService.findAllStates();
     }
 
     @PutMapping
-    public State update(@RequestBody State state) {
+    public StateDTO update(@RequestBody StateDTO state) {
         return stateService.updateState(state);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        stateService.deleteState(id);
+    public StateDTO delete(@PathVariable Long id) {
+        return stateService.deleteState(id);
     }
 }

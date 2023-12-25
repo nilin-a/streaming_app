@@ -1,5 +1,6 @@
 package com.company.app.controller.storedDataController;
 
+import com.company.app.dto.storedDataDTO.GenreDTO;
 import com.company.app.model.storedDataModel.Genre;
 import com.company.app.service.storedDataService.GenreService;
 import lombok.RequiredArgsConstructor;
@@ -15,26 +16,26 @@ public class GenreController {
     private final GenreService genreService;
 
     @PostMapping
-    public Genre create(@RequestBody Genre genre) {
+    public GenreDTO create(@RequestBody GenreDTO genre) {
         return genreService.createGenre(genre);
     }
     @GetMapping("/{id}")
-    public Genre find(@PathVariable Long id) {
+    public GenreDTO find(@PathVariable Long id) {
         return genreService.findGenre(id);
     }
 
     @GetMapping
-    public List<Genre> findAll() {
+    public List<GenreDTO> findAll() {
         return genreService.findAllGenre();
     }
 
     @PutMapping
-    public Genre update(@RequestBody Genre genre) {
+    public GenreDTO update(@RequestBody GenreDTO genre) {
         return  genreService.updateGenre(genre);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        genreService.deleteGenre(id);
+    public GenreDTO delete(@PathVariable Long id) {
+        return genreService.deleteGenre(id);
     }
 }
