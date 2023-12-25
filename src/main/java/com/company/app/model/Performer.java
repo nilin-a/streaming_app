@@ -36,7 +36,12 @@ public class Performer {
 
     @Column
     private Date birthDate;
-
-    @ManyToMany(mappedBy = "performers")
+//(mappedBy = "performers")
+    @ManyToMany
+    @JoinTable(
+            name = "performer_genre",
+            joinColumns = @JoinColumn(name = "performer_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id", referencedColumnName = "id")
+    )
     private List<Genre> genre;
 }
