@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-25T11:37:53+0400",
+    date = "2023-12-25T13:42:40+0400",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.1 (Oracle Corporation)"
 )
 @Component
@@ -29,12 +29,12 @@ public class PerformerMapperImpl implements PerformerMapper {
 
         Performer performer = new Performer();
 
+        performer.setGenre( genreListMapper.toEntiryList( performerDTO.getGenre() ) );
         performer.setId( performerDTO.getId() );
         performer.setName( performerDTO.getName() );
         performer.setInformation( performerDTO.getInformation() );
         performer.setCity( cityMapper.toEntity( performerDTO.getCity() ) );
         performer.setBirthDate( performerDTO.getBirthDate() );
-        performer.setGenre( genreListMapper.toEntiryList( performerDTO.getGenre() ) );
 
         return performer;
     }

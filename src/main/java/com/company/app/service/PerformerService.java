@@ -7,6 +7,7 @@ import com.company.app.mapper.storedDataMapper.CityMapper;
 import com.company.app.mapper.storedDataMapper.GenreMapper;
 import com.company.app.mapper.storedDataMapper.list.GenreListMapper;
 import com.company.app.model.Performer;
+import com.company.app.model.storedDataModel.Genre;
 import com.company.app.repository.PerformerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
