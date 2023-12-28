@@ -2,22 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Country</title>
+    <title>City</title>
 </head>
 <body>
 <table>
     <thead>
     <tr>
         <th>Id</th>
+        <th>City</th>
+        <th>State</th>
         <th>Country</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="country, iterStat : ${countries}">
-        <td th:text="${country.id}"></td>
-        <td th:text="${country.name}"></td>
+    <tr th:each="city, iterStat : ${cities}">
+        <td th:text="${city.id}"></td>
+        <td th:text="${city.name}"></td>
+        <td th:text="${city.state.name}"></td>
+        <td th:text="${city.state.country.name}"></td>
     </tr>
     </tbody>
 </table>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>State</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>Id</th>
+    <th>State</th>
+    <th>Country</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="state, iterStat : ${states}">
+    <td th:text="${state.id}"></td>
+    <td th:text="${state.name}"></td>
+    <td th:text="${state.country.name}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

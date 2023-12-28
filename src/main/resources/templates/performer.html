@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Performer</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Information</th>
+        <th>Birth date</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Genre</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="performer, iterStat : ${performers}">
+        <td th:text="${performer.id}"></td>
+        <td th:text="${performer.name}"></td>
+        <td th:text="${performer.information}"></td>
+        <td th:text="${performer.birthDate}"></td>
+        <td th:text="${performer.city.name}"></td>
+        <td th:text="${performer.city.state.name}"></td>
+        <td th:text="${performer.city.state.country.name}"></td>
+        <td>
+            <ul>
+                <li th:each="genre : ${performer.genre}" th:text="${genre.name}"></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
