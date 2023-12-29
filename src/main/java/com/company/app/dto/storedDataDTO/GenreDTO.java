@@ -11,6 +11,5 @@ import java.util.List;
 public class GenreDTO {
     private long id;
     private String name;
-    //private List<PerformerDTO> performers;
 }
 

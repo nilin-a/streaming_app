@@ -5,6 +5,20 @@
     <title>City</title>
 </head>
 <body>
+<div class="container">
+    <h1>Cities</h1>
+    <hr>
+    <h2>Create city</h2>
+    <form action="#" th:action="@{/thyme/cities/create}" th:object="${newCity}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="City name" class="form-control mb-4 col-4">
+        <div th:each="state : ${availableSates}">
+            <input type="radio" th:id="${'state_' + state.id}" th:name="selectedState" th:value="${state.id}" />
+            <label th:for="${'state_' + state.id}" th:text="${state.name}"></label><br />
+        </div>
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+</div>
 <table>
     <thead>
     <tr>
@@ -12,6 +26,8 @@
         <th>City</th>
         <th>State</th>
         <th>Country</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>

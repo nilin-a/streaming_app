@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Genre</title>
+    <meta charset="UTF-8">
+    <title>Genre</title>
 </head>
 <body>
+<div class="container">
+    <h1>Genres</h1>
+    <hr>
+    <h2>Create genre</h2>
+    <form action="#" th:action="@{/thyme/genres/create}" th:object="${newGenre}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="Genre name"
+               class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+</div>
 <table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>Genre</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="genre, iterStat : ${genres}">
-    <td th:text="${genre.id}"></td>
-    <td th:text="${genre.name}"></td>
-  </tr>
-  </tbody>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Genre</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="genre, iterStat : ${genres}">
+        <td th:text="${genre.id}"></td>
+        <td th:text="${genre.name}"></td>
+    </tr>
+    </tbody>
 </table>
 </body>
 </html>

@@ -5,6 +5,17 @@
     <title>Country</title>
 </head>
 <body>
+<div class="container">
+    <h1>Countries</h1>
+    <hr>
+    <h2>Create country</h2>
+    <form action="#" th:action="@{/thyme/countries/create}" th:object="${newCountry}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="Country name"
+               class="form-control mb-4 col-4">
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+</div>
 <table>
     <thead>
     <tr>

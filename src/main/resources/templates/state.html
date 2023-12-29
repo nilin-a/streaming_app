@@ -1,27 +1,41 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>State</title>
+    <meta charset="UTF-8">
+    <title>State</title>
 </head>
 <body>
+<div class="container">
+    <h1>States</h1>
+    <hr>
+    <h2>Create state</h2>
+    <form action="#" th:action="@{/thyme/states/create}" th:object="${newState}" method="POST">
+        <input type="text" th:field="*{name}" placeholder="State name" class="form-control mb-4 col-4">
+        <div th:each="country : ${availableCountries}">
+            <input type="radio" th:id="${'country_' + country.id}" th:name="selectedCountry" th:value="${country.id}" />
+            <label th:for="${'country_' + country.id}" th:text="${country.name}"></label><br />
+        </div>
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+</div>
 <table>
-  <thead>
-  <tr>
-    <th>Id</th>
-    <th>State</th>
-    <th>Country</th>
-    <th>Edit</th>
-    <th>Delete</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="state, iterStat : ${states}">
-    <td th:text="${state.id}"></td>
-    <td th:text="${state.name}"></td>
-    <td th:text="${state.country.name}"></td>
-  </tr>
-  </tbody>
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="state, iterStat : ${states}">
+        <td th:text="${state.id}"></td>
+        <td th:text="${state.name}"></td>
+        <td th:text="${state.country.name}"></td>
+    </tr>
+    </tbody>
 </table>
 </body>
 </html>
