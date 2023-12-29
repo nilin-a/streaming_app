@@ -46,4 +46,20 @@ public class PerformerThymeLeafController {
         performerService.createPerformer(performerDTO);
         return "redirect:/thyme/performers";
     }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable(value = "id") Long performerId, Model model) {
+        model.addAttribute("performer", performerService.findPerformer(performerId));
+        return "update-performer";
+    }
+
+    @PutMapping("/update")
+    public String update( ) {
+        return "redirect:/thyme/performers";
+    }
+
+    @DeleteMapping("/delete")
+    public String delete() {
+        return "redirect:/thyme/performers";
+    }
 }
