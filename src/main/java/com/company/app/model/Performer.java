@@ -36,8 +36,8 @@ public class Performer {
 
     @Column
     private Date birthDate;
-//(mappedBy = "performers")
-    @ManyToMany
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
             name = "performer_genre",
             joinColumns = @JoinColumn(name = "performer_id", referencedColumnName = "id"),

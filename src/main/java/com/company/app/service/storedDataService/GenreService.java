@@ -3,7 +3,9 @@ package com.company.app.service.storedDataService;
 import com.company.app.dto.storedDataDTO.GenreDTO;
 import com.company.app.mapper.storedDataMapper.GenreMapper;
 import com.company.app.mapper.storedDataMapper.list.GenreListMapper;
+import com.company.app.model.Performer;
 import com.company.app.model.storedDataModel.Genre;
+import com.company.app.repository.PerformerRepository;
 import com.company.app.repository.storedDataRepositroy.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import java.util.List;
 @Service
 public class GenreService {
     private final GenreRepository genreRepository;
+    private final PerformerRepository performerRepository;
     private final GenreMapper genreMapper;
     private final GenreListMapper genreListMapper;
 
@@ -39,6 +42,13 @@ public class GenreService {
 
     public GenreDTO deleteGenre(Long id) {
         Genre genre = genreRepository.findById(id).orElseThrow();
+
+        List<Performer> performers = performerRepository.findByGenreId(id);
+        for (Performer performer : performers) {
+            performer.getGenre().remove(genre);
+            performerRepository.save(performer);
+        }
+
         genreRepository.deleteById(id);
         return genreMapper.toDTO(genre);
     }

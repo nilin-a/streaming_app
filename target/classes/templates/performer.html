@@ -12,6 +12,10 @@
 <div class="container">
     <h1>Performers</h1>
     <hr>
+    <a href="/thyme/genres">Genres</a>
+    <a href="/thyme/cities">Cities</a>
+    <a href="/thyme/states">States</a>
+    <a href="/thyme/countries">Countries</a>
     <h2>Create performer</h2>
     <form action="#" th:action="@{/thyme/performers/create}" th:object="${newPerformer}" method="POST">
         <input type="text" th:field="*{name}" placeholder="Performer name" class="form-control mb-4 col-4">

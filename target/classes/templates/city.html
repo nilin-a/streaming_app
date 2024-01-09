@@ -12,15 +12,13 @@
 <div class="container">
     <h1>Cities</h1>
     <hr>
+    <a href="/thyme/performers">Performers</a>
+    <a href="/thyme/genres">Genres</a>
+    <a href="/thyme/states">States</a>
+    <a href="/thyme/countries">Countries</a>
     <h2>Create city</h2>
     <form action="#" th:action="@{/thyme/cities/create}" th:object="${newCity}" method="POST">
         <input type="text" th:field="*{name}" placeholder="City name" class="form-control mb-4 col-4">
-
-        <!--<div th:each="state : ${availableSates}">
-            <input type="radio" th:id="${'state_' + state.id}" th:name="selectedState" th:value="${state.id}" />
-            <label th:for="${'state_' + state.id}" th:text="${state.name}"></label><br />
-        </div> -->
-
         <select class="form-control mb-4 col-4" th:name="selectedState">
             <option value="0">State</option>
             <option th:each="state : ${availableStates}" th:value="${state.id}"

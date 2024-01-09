@@ -12,6 +12,10 @@
 <div class="container">
     <h1>Countries</h1>
     <hr>
+    <a href="/thyme/performers">Performers</a>
+    <a href="/thyme/genres">Genres</a>
+    <a href="/thyme/cities">Cities</a>
+    <a href="/thyme/states">States</a>
     <h2>Create country</h2>
     <form action="#" th:action="@{/thyme/countries/create}" th:object="${newCountry}" method="POST">
         <input type="text" th:field="*{name}" placeholder="Country name"

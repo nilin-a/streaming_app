@@ -20,10 +20,4 @@ public class Genre {
 
     @Column(unique = true, nullable = false)
     private String name;
-
-    /*@ManyToMany()
-    @JsonIgnore
-    private List<Performer> performers;
-
-     */
 }
