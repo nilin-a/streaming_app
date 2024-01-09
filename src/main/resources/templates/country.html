@@ -36,10 +36,12 @@
         <td th:text="${country.name}"></td>
         <td><a th:href="@{/thyme/countries/update/{id}(id=${country.id})}"
                class="btn btn-primary">Update</a></td>
-        <td><form action="#" th:action="@{/thyme/countries/delete/{id}(id=${country.id})}" method="POST">
-            <input type="hidden" name="_method" value="DELETE" />
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>
+        <td>
+            <form action="#" th:action="@{/thyme/countries/delete/{id}(id=${country.id})}" method="POST">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>State</title>
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1>States</h1>
+  <hr>
+  <h2>Update state</h2>
+  <form action="#" th:action="@{/thyme/states/update}" th:object="${state}" method="POST">
+    <input type="hidden" name="_method" value="PUT"/>
+    <input type="hidden" th:field="*{id}" />
+    <input type="text" th:field="*{name}" placeholder="State name" class="form-control mb-4 col-4">
+    <select class="form-control mb-4 col-4" th:name="selectedCountry">
+      <option value="0">Select country</option>
+      <option th:each="country : ${availableCountries}" th:value="${country.id}"
+              th:text="${country.name}" th:selected="${country.id == state.country.id}"></option>
+    </select>
+    <button type="submit" class="btn btn-info col-2">Update</button>
+  </form>
+  <hr>
+  <a th:href = "@{/thyme/states}"> Back to State List</a>
+</div>
+</body>
+</html>

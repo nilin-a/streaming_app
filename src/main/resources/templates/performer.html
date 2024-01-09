@@ -19,7 +19,7 @@
                class="form-control mb-4 col-4">
         <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4">
         <select class="form-control mb-4 col-4" th:name="selectedCity">
-            <option value="0">Select city</option>
+            <option value="0">City</option>
             <option th:each="city : ${availableCities}" th:value="${city.id}"
                     th:text="${city.name}"></option>
         </select>

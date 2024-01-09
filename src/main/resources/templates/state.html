@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>State</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -11,15 +15,23 @@
     <h2>Create state</h2>
     <form action="#" th:action="@{/thyme/states/create}" th:object="${newState}" method="POST">
         <input type="text" th:field="*{name}" placeholder="State name" class="form-control mb-4 col-4">
-        <div th:each="country : ${availableCountries}">
-            <input type="radio" th:id="${'country_' + country.id}" th:name="selectedCountry" th:value="${country.id}" />
-            <label th:for="${'country_' + country.id}" th:text="${country.name}"></label><br />
-        </div>
+
+        <!--<div th:each="country : ${availableCountries}">
+            <input type="radio" th:id="${'country_' + country.id}" th:name="selectedCountry" th:value="${country.id}"/>
+            <label th:for="${'country_' + country.id}" th:text="${country.name}"></label><br/>
+        </div> -->
+
+        <select class="form-control mb-4 col-4" th:name="selectedCountry">
+            <option value="0">Country</option>
+            <option th:each="country : ${availableCountries}" th:value="${country.id}"
+                    th:text="${country.name}"></option>
+        </select>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
 </div>
-<table>
+<table align="center" style="width:80%" border="1"
+       class="table table-striped table-responsive-md">
     <thead>
     <tr>
         <th>Id</th>
@@ -34,6 +46,14 @@
         <td th:text="${state.id}"></td>
         <td th:text="${state.name}"></td>
         <td th:text="${state.country.name}"></td>
+        <td><a th:href="@{/thyme/states/update/{id}(id=${state.id})}"
+               class="btn btn-primary">Update</a></td>
+        <td>
+            <form action="#" th:action="@{/thyme/states/delete/{id}(id=${state.id})}" method="POST">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>

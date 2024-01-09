@@ -30,4 +30,25 @@ public class StateThymeLeafController {
         stateService.createState(stateDTO);
         return "redirect:/thyme/states";
     }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") Long stateId, Model model) {
+        model.addAttribute("state", stateService.findState(stateId));
+        model.addAttribute("availableCountries", countryService.findAllCountries());
+        return "update-state";
+    }
+
+    @PutMapping("/update")
+    public String update(@ModelAttribute("state") StateDTO stateDTO,
+                         @RequestParam("selectedCountry") Long selectedCountry) {
+        stateDTO.setCountry(countryService.findCountry(selectedCountry));
+        stateService.updateState(stateDTO);
+        return "redirect:/thyme/states";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long stateId) {
+        stateService.deleteState(stateId);
+        return "redirect:/thyme/states";
+    }
 }
