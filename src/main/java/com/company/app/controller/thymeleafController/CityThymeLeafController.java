@@ -20,7 +20,7 @@ public class CityThymeLeafController {
     public String findAll(Model model) {
         model.addAttribute("cities", cityService.findAllCities());
         model.addAttribute("newCity", new CityDTO());
-        model.addAttribute("availableSates", stateService.findAllStates());
+        model.addAttribute("availableStates", stateService.findAllStates());
         return "city";
     }
 
@@ -28,6 +28,27 @@ public class CityThymeLeafController {
     public String create(@ModelAttribute("city") CityDTO cityDTO, @RequestParam("selectedState") Long selectedStateId) {
         cityDTO.setState(stateService.findState(selectedStateId));
         cityService.createCity(cityDTO);
+        return "redirect:/thyme/cities";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") Long cityId, Model model) {
+        model.addAttribute("city", cityService.findCity(cityId));
+        model.addAttribute("availableSates", stateService.findAllStates());
+        return "update-city";
+    }
+
+    @PutMapping("/update")
+    public String update(@ModelAttribute("city") CityDTO cityDTO,
+                         @RequestParam("selectedState") Long stateId) {
+        cityDTO.setState(stateService.findState(stateId));
+        cityService.updateCity(cityDTO);
+        return "redirect:/thyme/cities";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long cityId) {
+        cityService.deleteCity(cityId);
         return "redirect:/thyme/cities";
     }
 }

@@ -22,7 +22,7 @@
         </div> -->
 
         <select class="form-control mb-4 col-4" th:name="selectedCountry">
-            <option value="0">Select country</option>
+            <option value="0">Country</option>
             <option th:each="country : ${availableCountries}" th:value="${country.id}"
                     th:text="${country.name}"></option>
         </select>

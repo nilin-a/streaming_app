@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>City</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
@@ -11,15 +15,23 @@
     <h2>Create city</h2>
     <form action="#" th:action="@{/thyme/cities/create}" th:object="${newCity}" method="POST">
         <input type="text" th:field="*{name}" placeholder="City name" class="form-control mb-4 col-4">
-        <div th:each="state : ${availableSates}">
+
+        <!--<div th:each="state : ${availableSates}">
             <input type="radio" th:id="${'state_' + state.id}" th:name="selectedState" th:value="${state.id}" />
             <label th:for="${'state_' + state.id}" th:text="${state.name}"></label><br />
-        </div>
+        </div> -->
+
+        <select class="form-control mb-4 col-4" th:name="selectedState">
+            <option value="0">State</option>
+            <option th:each="state : ${availableStates}" th:value="${state.id}"
+                    th:text="${state.name}"></option>
+        </select>
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
 </div>
-<table>
+<table align="center" style="width:80%" border="1"
+       class="table table-striped table-responsive-md">
     <thead>
     <tr>
         <th>Id</th>
@@ -36,6 +48,14 @@
         <td th:text="${city.name}"></td>
         <td th:text="${city.state.name}"></td>
         <td th:text="${city.state.country.name}"></td>
+        <td><a th:href="@{/thyme/cities/update/{id}(id=${city.id})}"
+               class="btn btn-primary">Update</a></td>
+        <td>
+            <form action="#" th:action="@{/thyme/cities/delete/{id}(id=${city.id})}" method="POST">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
