@@ -18,20 +18,27 @@
         <input type="text" th:field="*{information}" placeholder="Performer information"
                class="form-control mb-4 col-4">
         <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4">
-        <div th:each="city : ${availableCities}">
-            <input type="radio" th:id="${'city_' + city.id}" th:name="selectedCity" th:value="${city.id}"/>
-            <label th:for="${'city_' + city.id}" th:text="${city.name}"></label><br/>
-        </div>
-        <div th:each="genre : ${availableGenres}">
+
+        <select class="form-control mb-4 col-4" th:name="selectedCity">
+            <option value="0">Select city</option>
+            <option th:each="city : ${availableCities}"  th:value="${city.id}"
+                    th:text="${city.name}"></option>
+        </select>
+
+        <select class="form-control mb-4 col-4" name="selectedGenres" multiple="multiple">
+            <option th:each="genre : ${availableGenres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+        </select>
+
+        <!--<div th:each="genre : ${availableGenres}">
             <input type="checkbox" th:id="${'genre_' + genre.id}" th:name="selectedGenres" th:value="${genre.id}"/>
             <label th:for="${'genre_' + genre.id}" th:text="${genre.name}"></label><br/>
-        </div>
+        </div> -->
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
 </div>
 <table align="center" style="width:80%" border="1"
-       class = "table table-striped table-responsive-md">
+       class="table table-striped table-responsive-md">
     <thead>
     <tr>
         <th>Id</th>
@@ -60,9 +67,9 @@
                 <li th:each="genre : ${performer.genre}" th:text="${genre.name}"></li>
             </ul>
         </td>
-        <td><a th:href="@{/update/{id}(id=${performer.id})}"
+        <td><a th:href="@{/thyme/performers/update/{id}(id=${performer.id})}"
                class="btn btn-primary">Update</a></td>
-        <td><a th:href="@{/delete/{id}(id=${performer.id})}"
+        <td><a th:href="@{/thyme/performers/delete/{id}(id=${performer.id})}"
                class="btn btn-danger">Delete</a></td>
     </tr>
     </tbody>
