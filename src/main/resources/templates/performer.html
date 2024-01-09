@@ -66,14 +66,10 @@
         </td>
         <td><a th:href="@{/thyme/performers/update/{id}(id=${performer.id})}"
                class="btn btn-primary">Update</a></td>
-        <td><a th:href="@{/thyme/performers/delete/{id}(id=${performer.id})}"
-               class="btn btn-danger">Delete</a>
-            <!--<form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" th:method="DELETE">
-                <input type="hidden" name="_method" value="DELETE" />
+        <td>
+            <form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" th:method="POST">
+                <input type="hidden" name="_method" value="DELETE"/>
                 <button type="submit" class="btn btn-danger">Delete</button>
-            </form>-->
-            <form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" method="post">
-                <button type="submit" class="btn btn-danger">Delete1</button>
             </form>
         </td>
     </tr>

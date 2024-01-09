@@ -46,9 +46,9 @@ public class PerformerService {
         return performerMapper.toDTO(updatedPerformer);
     }
 
-    public PerformerDTO deletePerformer(Long id) {
-        Performer performer = performerRepository.findById(id).orElseThrow();
+    public Long deletePerformer(Long id) {
+        //Performer performer = performerRepository.findById(id).orElseThrow();
         performerRepository.deleteById(id);
-        return performerMapper.toDTO(performer);
+        return id;
     }
 }
