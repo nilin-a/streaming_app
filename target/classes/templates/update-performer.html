@@ -3,27 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Performer</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
 <div class="container">
     <h1>Performers</h1>
     <hr>
     <h2>Update performer</h2>
-    <form action="#" th:action="@{/thyme/performers/update}" th:object="${performer}" method="Put">
+    <form action="#" th:action="@{/thyme/performers/update}" th:object="${performer}" method="POST">
         <input type="hidden" th:field="*{id}" />
         <input type="text" th:field="*{name}" placeholder="Performer name" class="form-control mb-4 col-4">
         <input type="text" th:field="*{information}" placeholder="Performer information"
                class="form-control mb-4 col-4">
         <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4">
-        <div th:each="city : ${availableCities}">
-            <input type="radio" th:id="${'city_' + city.id}" th:name="selectedCity" th:value="${city.id}"/>
-            <label th:for="${'city_' + city.id}" th:text="${city.name}"></label><br/>
+
+        <select class="form-control mb-4 col-4" th:name="selectedCity">
+            <option value="0">Select city</option>
+            <option th:each="city : ${availableCities}" th:value="${city.id}" th:text="${city.name}"
+                    th:selected="${city.id == performer.city.id}"></option>
+        </select>
+
+        <div>
+            <p>Genres:</p>
+            <ul>
+                <li th:each="genre : ${performer.genre}" th:text="${genre.name}"></li>
+            </ul>
         </div>
-        <div th:each="genre : ${availableGenres}">
-            <input type="checkbox" th:id="${'genre_' + genre.id}" th:name="selectedGenres" th:value="${genre.id}"/>
-            <label th:for="${'genre_' + genre.id}" th:text="${genre.name}"></label><br/>
-        </div>
+
+        <select class="form-control mb-4 col-4" name="selectedGenres" multiple="multiple">
+            <option th:each="genre : ${availableGenres}" th:value="${genre.id}" th:text="${genre.name}"></option>
+        </select>
         <button type="submit" class="btn btn-info col-2">Update</button>
+        <!--<a th:href="@{/thyme/performers/update}"
+           class="btn btn-primary">Update</a> -->
     </form>
     <hr>
     <a th:href = "@{/thyme/performers}"> Back to Performers List</a>

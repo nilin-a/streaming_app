@@ -6,10 +6,7 @@ import com.company.app.service.storedDataService.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
@@ -27,6 +24,24 @@ public class CountryThymeLeafController {
     @PostMapping("/create")
     public String create(@ModelAttribute("country") CountryDTO countryDTO) {
         countryService.createCountry(countryDTO);
+        return "redirect:/thyme/countries";
+    }
+
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") Long countryId, Model model) {
+        model.addAttribute("country", countryService.findCountry(countryId));
+        return "update-country";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute("country") CountryDTO countryDTO) {
+        countryService.updateCountry(countryDTO);
+        return "redirect:/thyme/countries";
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long countryId) {
+        countryService.deleteCountry(countryId);
         return "redirect:/thyme/countries";
     }
 }

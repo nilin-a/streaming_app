@@ -50,16 +50,35 @@ public class PerformerThymeLeafController {
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable(value = "id") Long performerId, Model model) {
         model.addAttribute("performer", performerService.findPerformer(performerId));
+        model.addAttribute("availableCities", cityService.findAllCities());
+        model.addAttribute("availableGenres", genreService.findAllGenre());
         return "update-performer";
     }
 
-    @PutMapping("/update")
-    public String update( ) {
+    @PostMapping("/update")
+    public String update(@ModelAttribute("performer") PerformerDTO performerDTO,
+                         @RequestParam("selectedCity") Long selectedCity,
+                         @RequestParam("selectedGenres") List<Long> selectedGenres) {
+        performerDTO.setCity(cityService.findCity(selectedCity));
+        List<GenreDTO> selectedGenreList = new ArrayList<>();
+        for (Long genreId : selectedGenres) {
+            GenreDTO genreDTO = genreService.findGenre(genreId);
+            selectedGenreList.add(genreDTO);
+        }
+        performerDTO.setGenre(selectedGenreList);
+        performerService.updatePerformer(performerDTO);
         return "redirect:/thyme/performers";
     }
 
-    @DeleteMapping("/delete")
-    public String delete() {
+    /*@GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long performerId) {
+        performerService.deletePerformer(performerId);
+        return "redirect:/thyme/performers";
+    }*/
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long performerId) {
+        performerService.deletePerformer(performerId);
         return "redirect:/thyme/performers";
     }
 }

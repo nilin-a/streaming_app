@@ -18,21 +18,14 @@
         <input type="text" th:field="*{information}" placeholder="Performer information"
                class="form-control mb-4 col-4">
         <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4">
-
         <select class="form-control mb-4 col-4" th:name="selectedCity">
             <option value="0">Select city</option>
-            <option th:each="city : ${availableCities}"  th:value="${city.id}"
+            <option th:each="city : ${availableCities}" th:value="${city.id}"
                     th:text="${city.name}"></option>
         </select>
-
         <select class="form-control mb-4 col-4" name="selectedGenres" multiple="multiple">
             <option th:each="genre : ${availableGenres}" th:value="${genre.id}" th:text="${genre.name}"></option>
         </select>
-
-        <!--<div th:each="genre : ${availableGenres}">
-            <input type="checkbox" th:id="${'genre_' + genre.id}" th:name="selectedGenres" th:value="${genre.id}"/>
-            <label th:for="${'genre_' + genre.id}" th:text="${genre.name}"></label><br/>
-        </div> -->
         <button type="submit" class="btn btn-info col-2">Save</button>
     </form>
     <hr>
@@ -70,7 +63,15 @@
         <td><a th:href="@{/thyme/performers/update/{id}(id=${performer.id})}"
                class="btn btn-primary">Update</a></td>
         <td><a th:href="@{/thyme/performers/delete/{id}(id=${performer.id})}"
-               class="btn btn-danger">Delete</a></td>
+               class="btn btn-danger">Delete</a>
+            <!--<form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" th:method="DELETE">
+                <input type="hidden" name="_method" value="DELETE" />
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>-->
+            <form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" method="post">
+                <button type="submit" class="btn btn-danger">Delete1</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
