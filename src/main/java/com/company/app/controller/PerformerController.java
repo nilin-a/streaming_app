@@ -34,7 +34,7 @@ public class PerformerController {
     }
 
     @DeleteMapping("/{id}")
-    public Long delete(@PathVariable Long id) {
+    public PerformerDTO delete(@PathVariable Long id) {
         return performerService.deletePerformer(id);
     }
 }

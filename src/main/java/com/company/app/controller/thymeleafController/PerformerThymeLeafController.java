@@ -55,7 +55,7 @@ public class PerformerThymeLeafController {
         return "update-performer";
     }
 
-    @PutMapping("/update")
+    @PostMapping("/update")
     public String update(@ModelAttribute("performer") PerformerDTO performerDTO,
                          @RequestParam("selectedCity") Long selectedCity,
                          @RequestParam("selectedGenres") List<Long> selectedGenres) {
@@ -70,7 +70,13 @@ public class PerformerThymeLeafController {
         return "redirect:/thyme/performers";
     }
 
-    @DeleteMapping("/delete/{id}")
+    /*@GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long performerId) {
+        performerService.deletePerformer(performerId);
+        return "redirect:/thyme/performers";
+    }*/
+
+    @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long performerId) {
         performerService.deletePerformer(performerId);
         return "redirect:/thyme/performers";
