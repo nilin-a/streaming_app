@@ -11,7 +11,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/performers")
+@RequestMapping("/performer")
 @Tag(name = "Performer Service", description = "Service for managing performers")
 public class PerformerController {
     private final PerformerService performerService;
