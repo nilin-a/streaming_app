@@ -1,9 +1,7 @@
 package com.simbirsoft.performer.service;
 
 import com.simbirsoft.performer.dto.SongDTO;
-import com.simbirsoft.performer.mapper.PerformerMapper;
-import com.simbirsoft.performer.mapper.SongListMapper;
-import com.simbirsoft.performer.mapper.SongMapper;
+import com.simbirsoft.performer.mapper.*;
 import com.simbirsoft.performer.mapper.storedDataMapper.GenreMapper;
 import com.simbirsoft.performer.model.Song;
 import com.simbirsoft.performer.repository.SongRepository;
@@ -18,7 +16,8 @@ public class SongService {
     private final SongRepository songRepository;
     private final SongMapper songMapper;
     private final SongListMapper songListMapper;
-    private final PerformerMapper performerMapper;
+    private final PerformerListMapper performerListMapper;
+    private final AlbumMapper albumMapper;
     private final GenreMapper genreMapper;
 
     public SongDTO createSong(SongDTO songDTO) {
@@ -36,10 +35,14 @@ public class SongService {
 
     public SongDTO updateSong(SongDTO song) {
         Song updatedSong = songRepository.findById(song.getId()).orElseThrow();
-        updatedSong.setName(song.getName());
-        updatedSong.setPerformer(performerMapper.toEntity(song.getPerformer()));
-        updatedSong.setGenre(genreMapper.toEntity(song.getGenre()));
+        updatedSong.setTitle(song.getTitle());
         updatedSong.setDuration(song.getDuration());
+        updatedSong.setLyrics(song.getLyrics());
+        updatedSong.setReleaseDate(song.getReleaseDate());
+        updatedSong.setAlbum(albumMapper.toEntity(song.getAlbum()));
+        updatedSong.setPerformers(performerListMapper.toEntityList(song.getPerformers()));
+        updatedSong.setFeaturing(performerListMapper.toEntityList(song.getPerformers()));
+        updatedSong.setGenre(genreMapper.toEntity(song.getGenre()));
         songRepository.save(updatedSong);
         return songMapper.toDTO(updatedSong);
     }

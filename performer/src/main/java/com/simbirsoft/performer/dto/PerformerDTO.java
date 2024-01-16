@@ -15,6 +15,5 @@ public class PerformerDTO {
     private String name;
     private String information;
     private CityDTO city;
-    private Date birthDate;
     private List<GenreDTO> genre;
 }

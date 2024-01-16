@@ -8,13 +8,12 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.sql.Date;
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "performer")
 public class Performer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,10 +31,7 @@ public class Performer {
     @OnDelete(action = OnDeleteAction.SET_NULL)
     private City city;
 
-    @Column
-    private Date birthDate;
-
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany()
     @JoinTable(
             name = "performer_genre",
             joinColumns = @JoinColumn(name = "performer_id", referencedColumnName = "id"),
