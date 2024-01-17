@@ -38,7 +38,7 @@ public class Song {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Album album;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany()
     @JoinTable(
             name = "song_performer",
             joinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id"),

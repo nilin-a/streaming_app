@@ -48,8 +48,8 @@ public class SongService {
     }
 
     public SongDTO deleteSong(Long id) {
-        Song song = songRepository.findById(id).orElseThrow();
+        SongDTO songDTO = songMapper.toDTO(songRepository.findById(id).orElseThrow());
         songRepository.deleteById(id);
-        return songMapper.toDTO(song);
+        return songDTO;
     }
 }

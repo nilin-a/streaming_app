@@ -27,7 +27,7 @@ public class Album {
     @Column(nullable = false, columnDefinition = "date DEFAULT current_date")
     private LocalDate releaseDate;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany()
     @Column(nullable = false)
     @JoinTable(
             name = "album_performer",

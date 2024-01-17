@@ -46,8 +46,8 @@ public class AlbumService {
     }
 
     public AlbumDTO deleteAlbum(Long id) {
-        Album album = albumRepository.findById(id).orElseThrow();
+        AlbumDTO albumDTO = albumMapper.toDTO(albumRepository.findById(id).orElseThrow());
         albumRepository.deleteById(id);
-        return albumMapper.toDTO(album);
+        return albumDTO;
     }
 }
