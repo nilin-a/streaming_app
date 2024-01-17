@@ -10,6 +10,7 @@ import com.simbirsoft.performer.repository.AlbumRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -22,6 +23,9 @@ public class AlbumService {
     private final SongListMapper songListMapper;
 
     public AlbumDTO createAlbum(AlbumDTO albumDTO) {
+        if (albumDTO.getReleaseDate() == null) {
+            albumDTO.setReleaseDate(LocalDate.now());
+        }
         Album album = albumRepository.save(albumMapper.toEntity(albumDTO));
         return albumMapper.toDTO(albumRepository.findById(album.getId()).orElseThrow());
     }

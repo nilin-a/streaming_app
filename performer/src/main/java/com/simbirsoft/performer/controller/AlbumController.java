@@ -21,9 +21,6 @@ public class AlbumController {
     @Operation(summary = "Create album")
     @PostMapping
     public AlbumDTO create(@RequestBody AlbumDTO albumDTO) {
-        if (albumDTO.getReleaseDate() == null) {
-            albumDTO.setReleaseDate(LocalDate.now());
-        }
         return albumService.createAlbum(albumDTO);
     }
 

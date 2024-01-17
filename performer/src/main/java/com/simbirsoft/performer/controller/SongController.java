@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class SongController {
     @Operation(summary = "Create song")
     @PostMapping
     public SongDTO create(@RequestBody SongDTO song) {
-        return songService.createSong(song);
+            return songService.createSong(song);
     }
 
     @Operation(summary = "Get song")

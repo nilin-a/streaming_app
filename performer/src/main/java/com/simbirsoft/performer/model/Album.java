@@ -27,7 +27,7 @@ public class Album {
     @Column(nullable = false, columnDefinition = "date DEFAULT current_date")
     private LocalDate releaseDate;
 
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @Column(nullable = false)
     @JoinTable(
             name = "album_performer",
@@ -36,7 +36,6 @@ public class Album {
     )
     private List<Performer> performers;
 
-    @OneToMany(mappedBy = "album")
-    @JsonIgnore
+    @OneToMany(mappedBy = "album", fetch = FetchType.LAZY)
     private List<Song> songs;
 }
