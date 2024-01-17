@@ -7,8 +7,8 @@ import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -24,14 +24,14 @@ public class Song {
     @Column(nullable = false)
     private String title;
 
-    @Column(nullable = false)
-    private Time duration;
+    @Column(nullable = false, columnDefinition = "interval")
+    private Duration duration;
 
     @Column
     private String lyrics;
 
     @Column(nullable = false, columnDefinition = "date DEFAULT current_date")
-    private Date releaseDate;
+    private LocalDate releaseDate;
 
     @ManyToOne()
     @JoinColumn(name = "album_id", referencedColumnName = "id")
