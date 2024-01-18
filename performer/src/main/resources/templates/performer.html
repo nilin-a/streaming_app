@@ -21,7 +21,6 @@
         <input type="text" th:field="*{name}" placeholder="Performer name" class="form-control mb-4 col-4">
         <input type="text" th:field="*{information}" placeholder="Performer information"
                class="form-control mb-4 col-4">
-        <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4">
         <select class="form-control mb-4 col-4" th:name="selectedCity">
             <option value="0">City</option>
             <option th:each="city : ${availableCities}" th:value="${city.id}"
@@ -41,7 +40,6 @@
         <th>Id</th>
         <th>Name</th>
         <th>Information</th>
-        <th>Birth date</th>
         <th>City</th>
         <th>State</th>
         <th>Country</th>
@@ -55,7 +53,6 @@
         <td th:text="${performer.id}"></td>
         <td th:text="${performer.name}"></td>
         <td th:text="${performer.information}"></td>
-        <td th:text="${performer.birthDate}"></td>
         <td th:text="${performer.city.name}"></td>
         <td th:text="${performer.city.state.name}"></td>
         <td th:text="${performer.city.state.country.name}"></td>
@@ -68,10 +65,6 @@
                class="btn btn-primary">Update</a></td>
         <td><a th:href="@{/thyme/performers/delete/{id}(id=${performer.id})}"
                class="btn btn-danger">Delete</a>
-            <!--<form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" th:method="DELETE">
-                <input type="hidden" name="_method" value="DELETE" />
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>-->
             <form th:action="@{/thyme/performers/delete/{id}(id=${performer.id})}" method="post">
                 <button type="submit" class="btn btn-danger">Delete1</button>
             </form>

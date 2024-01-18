@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring", uses = {PerformerMapper.class, GenreMapper.class})
 public interface SongMapper {
     Song toEntity(SongDTO songDTO);
+    @Mapping(target = "album.songs", ignore = true)
     SongDTO toDTO(Song song);
 }

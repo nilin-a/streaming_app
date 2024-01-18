@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/thyme/genres")
+@RequestMapping("/thyme/genre")
 public class GenreThymeLeafController {
     private final GenreService genreService;
 

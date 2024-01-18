@@ -68,12 +68,6 @@ public class PerformerThymeLeafController {
         return "redirect:/thyme/performers";
     }
 
-    /*@GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long performerId) {
-        performerService.deletePerformer(performerId);
-        return "redirect:/thyme/performers";
-    }*/
-
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long performerId) {
         performerService.deletePerformer(performerId);
