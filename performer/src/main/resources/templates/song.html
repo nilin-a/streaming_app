@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Song</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container">
+    <h1>Songs</h1>
+    <hr>
+    <a href="/thyme/albums">Albums</a>
+    <a href="/thyme/performers">Performers</a>
+    <a href="/thyme/genres">Genres</a>
+    <a href="/thyme/cities">Cities</a>
+    <a href="/thyme/states">States</a>
+    <a href="/thyme/countries">Countries</a>
+    <h2>Create song</h2>
+    <form action="#" th:action="@{/thyme/songs/create}" th:object="${newSong}" method="POST">
+        <input type="text" th:field="*{title}" placeholder="Song title"
+               class="form-control mb-4 col-4">
+        <input type="number" th:field="*{durationInSeconds}" placeholder="Song duration in seconds"
+               class="form-control mb-4 col-4">
+        <input type="date" th:field="*{releaseDate}" placeholder="Song release date"
+               class="form-control mb-4 col-4">
+        <input type="text" th:field="*{lyrics}" placeholder="Song lyrics"
+               class="form-control mb-4 col-4">
+        <select class="form-control mb-4 col-4" th:name="selectedAlbum">
+            <option value="0">Album</option>
+            <option th:each="album : ${availableAlbums}" th:value="${album.id}"
+                    th:text="${album.title}"></option>
+        </select>
+        <select class="form-control mb-4 col-4" name="selectedPerformers" multiple="multiple">
+            <option th:each="performer : ${availablePerformers}" th:value="${performer.id}"
+                    th:text="${performer.name}"></option>
+        </select>
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+    <hr>
+</div>
+<table align="center" style="width:80%" border="1"
+       class="table table-striped table-responsive-md">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Duration</th>
+        <th>Release Date</th>
+        <th>Lyrics</th>
+        <th>Album</th>
+        <th>Performers</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song, iterStat : ${songs}">
+        <td th:text="${song.id}"></td>
+        <td th:text="${song.title}"></td>
+        <td th:text="${song.durationInSeconds}"></td>
+        <td th:text="${song.releaseDate}"></td>
+        <td th:text="${song.lyrics}"></td>
+        <td th:text="${song.album.title}"></td>
+        <td>
+            <ul>
+                <li th:each="performer : ${song.performers}" th:text="${performer.name}"></li>
+            </ul>
+        </td>
+        <td><a th:href="@{/thyme/songs/update/{id}(id=${song.id})}"
+               class="btn btn-primary">Update</a></td>
+        <td>
+            <form action="#" th:action="@{/thyme/songs/delete/{id}(id=${song.id})}" method="POST">
+                <input type="hidden" name="_method" value="DELETE"/>
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>

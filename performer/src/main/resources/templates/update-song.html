@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Song</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
-
+<div class="container">
+    <h1>Songs</h1>
+    <hr>
+    <h2>Update song</h2>
+    <form action="#" th:action="@{/thyme/songs/update}" th:object="${song}" method="POST">
+        <input type="hidden" name="_method" value="PUT"/>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="text" th:field="*{title}" placeholder="Song title"
+               class="form-control mb-4 col-4">
+        <input type="number" th:field="*{durationInSeconds}" placeholder="Song duration"
+               class="form-control mb-4 col-4">
+        <input type="date" th:field="*{releaseDate}" class="form-control mb-4 col-4"
+               th:value="${song.releaseDate}">
+        <input type="text" th:field="*{lyrics}" placeholder="Song lyrics"
+               class="form-control mb-4 col-4">
+        <select class="form-control mb-4 col-4" th:name="selectedAlbum">
+            <option value="0">Select album</option>
+            <option th:each="album : ${availableAlbums}" th:value="${album.id}" th:text="${album.title}"
+                    th:selected="${album.id == song.album.id}"></option>
+        </select>
+        <div>
+            <p>Performers:</p>
+            <ul>
+                <li th:each="performer : ${song.performers}" th:text="${performer.name}"></li>
+            </ul>
+        </div>
+        <select class="form-control mb-4 col-4" name="selectedPerformers" multiple="multiple">
+            <option th:each="performer : ${availablePerformers}" th:value="${performer.id}"
+                    th:text="${performer.name}"></option>
+        </select>
+        <button type="submit" class="btn btn-info col-2">Update</button>
+    </form>
+    <hr>
+    <a th:href="@{/thyme/songs}"> Back to Song List</a>
+</div>
 </body>
 </html>

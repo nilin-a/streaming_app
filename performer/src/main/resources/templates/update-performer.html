@@ -18,14 +18,11 @@
         <input type="text" th:field="*{name}" placeholder="Performer name" class="form-control mb-4 col-4">
         <input type="text" th:field="*{information}" placeholder="Performer information"
                class="form-control mb-4 col-4">
-        <input type="date" th:field="*{birthDate}" class="form-control mb-4 col-4">
-
         <select class="form-control mb-4 col-4" th:name="selectedCity">
             <option value="0">Select city</option>
             <option th:each="city : ${availableCities}" th:value="${city.id}" th:text="${city.name}"
                     th:selected="${city.id == performer.city.id}"></option>
         </select>
-
         <div>
             <p>Genres:</p>
             <ul>
