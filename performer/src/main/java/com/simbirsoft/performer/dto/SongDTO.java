@@ -15,7 +15,7 @@ public class SongDTO {
     private Long durationInSeconds;
     private String lyrics;
     private LocalDate releaseDate;
-    //private AlbumDTO album;
+    private AlbumDTO album;
     private List<PerformerDTO> performers;
     private GenreDTO genre;
 }

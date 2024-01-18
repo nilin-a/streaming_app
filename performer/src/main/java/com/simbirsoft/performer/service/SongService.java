@@ -45,7 +45,7 @@ public class SongService {
         updatedSong.setDurationInSeconds(song.getDurationInSeconds());
         updatedSong.setLyrics(song.getLyrics());
         updatedSong.setReleaseDate(song.getReleaseDate());
-        //updatedSong.setAlbum(albumMapper.toEntity(song.getAlbum()));
+        updatedSong.setAlbum(albumMapper.toEntity(song.getAlbum()));
         updatedSong.setPerformers(performerListMapper.toEntityList(song.getPerformers()));
         updatedSong.setGenre(genreMapper.toEntity(song.getGenre()));
         songRepository.save(updatedSong);

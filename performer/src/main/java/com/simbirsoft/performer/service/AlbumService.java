@@ -44,7 +44,7 @@ public class AlbumService {
         updatedAlbum.setDescription(albumDTO.getDescription());
         updatedAlbum.setReleaseDate(albumDTO.getReleaseDate());
         updatedAlbum.setPerformers(performerListMapper.toEntityList(albumDTO.getPerformers()));
-        updatedAlbum.setSongs(songListMapper.toEntityList(albumDTO.getSongs()));
+        //updatedAlbum.setSongs(songListMapper.toEntityList(albumDTO.getSongs()));
         albumRepository.save(updatedAlbum);
         return albumMapper.toDTO(albumRepository.findById(albumDTO.getId()).orElseThrow());
     }
