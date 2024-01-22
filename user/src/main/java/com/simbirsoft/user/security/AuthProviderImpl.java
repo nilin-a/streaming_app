@@ -16,6 +16,7 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class AuthProviderImpl implements AuthenticationProvider {
     private final UserService userService;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userName = authentication.getName();
