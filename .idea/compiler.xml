@@ -25,6 +25,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="streaming_app" target="21" />
+      <module name="usermodule" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -33,6 +34,7 @@
       <module name="performer" options="-parameters" />
       <module name="song" options="-parameters" />
       <module name="streaming_app" options="-parameters" />
+      <module name="usermodule" options="-parameters" />
     </option>
   </component>
 </project>
