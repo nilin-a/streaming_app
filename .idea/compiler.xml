@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="song" />
+        <module name="user" />
       </profile>
       <profile name="Annotation profile for performer" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -34,6 +35,7 @@
       <module name="performer" options="-parameters" />
       <module name="song" options="-parameters" />
       <module name="streaming_app" options="-parameters" />
+      <module name="user" options="-parameters" />
       <module name="usermodule" options="-parameters" />
     </option>
   </component>

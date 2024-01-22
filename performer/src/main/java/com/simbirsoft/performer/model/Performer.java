@@ -16,8 +16,8 @@ import java.util.List;
 @Table(name = "performer")
 public class Performer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
