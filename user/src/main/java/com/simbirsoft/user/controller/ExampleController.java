@@ -1,24 +1,35 @@
 package com.simbirsoft.user.controller;
 
+import com.simbirsoft.user.dto.JwtAuthenticationResponse;
+import com.simbirsoft.user.dto.SignInRequest;
+import com.simbirsoft.user.dto.SignUpRequest;
+import com.simbirsoft.user.service.AuthenticationService;
 import com.simbirsoft.user.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/example")
 @RequiredArgsConstructor
 @Tag(name = "Аутентификация")
-public class MenuController {
-
+public class ExampleController {
     private final UserService service;
+    private final AuthenticationService authenticationService;
+    @Operation(summary = "Регистрация пользователя")
+    @PostMapping("/sign-up")
+    public JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request) {
+        return authenticationService.signUp(request);
+    }
+
+    @Operation(summary = "Авторизация пользователя")
+    @PostMapping("/sign-in")
+    public JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request) {
+        return authenticationService.signIn(request);
+    }
 
     @GetMapping
     @Operation(summary = "Доступен только авторизованным пользователям")
@@ -36,6 +47,6 @@ public class MenuController {
     @GetMapping("/get-admin")
     @Operation(summary = "Получить роль ADMIN (для демонстрации)")
     public void getAdmin() {
-        service.getAdmin();
+        service.setAdminRole();
     }
 }

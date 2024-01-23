@@ -1,5 +1,7 @@
 package com.simbirsoft.user.service;
 
+import com.simbirsoft.user.dto.UserDTO;
+import com.simbirsoft.user.mapper.UserMapper;
 import com.simbirsoft.user.model.Role;
 import com.simbirsoft.user.model.User;
 import com.simbirsoft.user.repository.UserRepository;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -36,15 +39,21 @@ public class UserService {
         return this::getByUsername;
     }
 
-    public User getCurrentUser() {
+    public UserDTO getCurrentUser() {
         // Получение имени пользователя из контекста Spring Security
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return getByUsername(username);
+        return userMapper.toDTO(getByUsername(username));
     }
 
-    public void getAdmin() {
-        var user = getCurrentUser();
+    public void setAdminRole() {
+        UserDTO user = getCurrentUser();
         user.setRole(Role.ROLE_ADMIN);
-        save(user);
+        save(userMapper.toEntity(user));
+    }
+
+    public void setUserRole() {
+        UserDTO user = getCurrentUser();
+        user.setRole(Role.ROLE_USER);
+        save(userMapper.toEntity(user));
     }
 }
