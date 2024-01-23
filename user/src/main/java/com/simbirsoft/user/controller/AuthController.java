@@ -1,32 +1,34 @@
 package com.simbirsoft.user.controller;
 
+import com.simbirsoft.user.dto.JwtAuthenticationResponse;
+import com.simbirsoft.user.dto.SignInRequest;
+import com.simbirsoft.user.dto.SignUpRequest;
 import com.simbirsoft.user.model.User;
+import com.simbirsoft.user.service.AuthenticationService;
 import com.simbirsoft.user.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequiredArgsConstructor
+@RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
+@Tag(name = "Аутентификация")
 public class AuthController {
-    private final UserService userService;
-    @GetMapping("login")
-    public String loginPage() {
-        return "auth/login";
+    private final AuthenticationService authenticationService;
+
+    @Operation(summary = "Регистрация пользователя")
+    @PostMapping("/sign-up")
+    public JwtAuthenticationResponse signUp(@RequestBody @Valid SignUpRequest request) {
+        return authenticationService.signUp(request);
     }
 
-    @GetMapping("registration")
-    public String registrationPage(@ModelAttribute("user") User user) {
-        return "auth/registration";
-    }
-
-    @PostMapping("/registration")
-    public String register(@ModelAttribute("user") User user) {
-        userService.register(user);
-        return "menu";
+    @Operation(summary = "Авторизация пользователя")
+    @PostMapping("/sign-in")
+    public JwtAuthenticationResponse signIn(@RequestBody @Valid SignInRequest request) {
+        return authenticationService.signIn(request);
     }
 }
