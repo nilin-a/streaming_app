@@ -47,5 +47,10 @@ public class AuthController {
         return "menu";
     }
 
+    @GetMapping("/log-out")
+    public String logOut() {
+        authenticationService.logOut();
+        return "auth/sign-in";
+    }
 
 }

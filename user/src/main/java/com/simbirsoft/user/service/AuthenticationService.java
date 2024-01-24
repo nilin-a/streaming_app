@@ -8,6 +8,7 @@ import com.simbirsoft.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +46,9 @@ public class AuthenticationService {
 
         var jwt = jwtService.generateToken(user);
         return new JwtAuthenticationResponse(jwt);
+    }
+
+    public void logOut() {
+        SecurityContextHolder.clearContext();
     }
 }
