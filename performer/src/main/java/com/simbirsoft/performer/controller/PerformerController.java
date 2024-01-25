@@ -16,6 +16,11 @@ import java.util.List;
 public class PerformerController {
     private final PerformerService performerService;
 
+    @GetMapping("/hi")
+    public String hi() {
+        return "Hi";
+    }
+
     @Operation(summary = "Create performer")
     @PostMapping
     public PerformerDTO create(@RequestBody PerformerDTO performer) {

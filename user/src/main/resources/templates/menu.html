@@ -6,7 +6,7 @@
 </head>
 <body>
 <form th:method="POST" th:action="@{/auth/log-out}" th:object="${user}">
-    <label for="username">Введите имя пользователя: </label>
+    <!--<label for="username">Введите имя пользователя: </label>
     <input type="text" th:field="*{username}" id="username"/>
     <div style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
     <br/>
@@ -18,8 +18,9 @@
     <label for="password">Введите пароль: </label>
     <input type="password" th:field="*{password}" id="password"/>
     <div style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
-    <br/>
-    <input type="submit" value="Log out!"/>
+    <br/>-->
+    <input type="submit" value="Log out!"/>-
+
 </form>
 </body>
 </html>

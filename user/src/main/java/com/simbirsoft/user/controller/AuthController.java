@@ -1,10 +1,13 @@
 package com.simbirsoft.user.controller;
+import com.simbirsoft.user.config.JwtAuthenticationFilter;
 import com.simbirsoft.user.dto.SignInRequest;
 import com.simbirsoft.user.dto.SignUpRequest;
 import com.simbirsoft.user.dto.UserDTO;
 import com.simbirsoft.user.service.AuthenticationService;
 import com.simbirsoft.user.service.UserService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,8 +27,12 @@ public class AuthController {
     }
 
     @PostMapping("/sign-in")
-    public String signIn(@ModelAttribute("user") @Valid SignInRequest signInRequest) {
-        authenticationService.signIn(signInRequest);
+    public String signIn(@ModelAttribute("user") @Valid SignInRequest signInRequest, HttpServletResponse response) {
+
+        response.addCookie(new Cookie(
+                JwtAuthenticationFilter.HEADER_NAME,
+                JwtAuthenticationFilter.BEARER_PREFIX + authenticationService.signIn(signInRequest).getToken()
+        ));
         return "redirect:/auth/menu";
     }
 
@@ -48,8 +55,9 @@ public class AuthController {
     }
 
     @GetMapping("/log-out")
-    public String logOut() {
+    public String logOut(HttpServletResponse response) {
         authenticationService.logOut();
+        response.addCookie(new Cookie(JwtAuthenticationFilter.HEADER_NAME, ""));
         return "auth/sign-in";
     }
 
